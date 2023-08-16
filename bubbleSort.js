@@ -33,6 +33,34 @@
 // Feel free to add helper functions if needed.
 
 
-var bubbleSort = function(array) {
+const bubbleSort = function(array) {
   // Your code here.
+  // create a variable to store the length of the array
+  let length = array.length;
+  // create a variable to store the swap status
+  let swapped;
+  // create a do while loop that will run as long as swapped is true
+  do {
+    // set swapped to false
+    swapped = false;
+    // iterate through the array
+    for (let i = 0; i < length; i++) {
+      // if the current element is greater than the next element
+      if (array[i] > array[i + 1]) {
+        // swap the current element with the next element
+        let temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
+        // set swapped to true
+        swapped = true;
+      }
+    }
+  }
+  // while swapped is true
+  while (swapped);
+  // return the array
+  return array;
 };
+
+let result = bubbleSort([2, 1, 3]); // yields [1, 2, 3]
+console.log(result);
