@@ -2,6 +2,14 @@
 
   
 function confirmEnding(str, target) {
-  // Your code goes here
+  // simply return if the character at the end is equal to the target
+  // acount for upper lower cases 
+  str = str.toLowerCase();
+  target = target.toLowerCase();
+
+  return str[str.length - 1] === target
 }
-confirmEnding("Apple", "e"); // Should return either: true or false
+
+let res = confirmEnding("Applepumpkin", "N"); // Should return either: true or false
+
+console.log(res);
