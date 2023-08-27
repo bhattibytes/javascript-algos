@@ -1,7 +1,9 @@
 // Create a function that checks if a given input is a boolean.
 
 function boo(bool) {
-  // your code goes here
-  return bool;
+  // simply return the expression type of bool is a boolean value
+  return typeof bool ===  'boolean';
 }
-boo(null); // Should return false
+
+let res = boo(null); // Should return false
+console.log(res)
