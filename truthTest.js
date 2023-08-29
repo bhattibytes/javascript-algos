@@ -2,8 +2,18 @@
 
 function findElement(arr, func) {
   let num = 0;
-  // Your code goes here
+  // loop over the array and check if the function returns true
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i])) {
+      // reassign num to the first element that returns true
+      num = arr[i]
+      // break out of the loop
+      break;
+    }
+  }
+  // return the num that passed the truth test
   return num;
 }
-findElement([1, 2, 3, 4], num => num % 2 === 0); // Should return 2
+let res = findElement([1, 2, 3, 4], num => num % 2 === 0); // Should return 2
+console.log(res)
 
