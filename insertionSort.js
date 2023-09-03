@@ -45,8 +45,30 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array
-) {
-  // Your code goes here. Feel free to add helper functions if needed.
+const insertionSort = function(array) {
+  // take inputted array and transform it into an array of objects if it isn't already
+  if (typeof array[0] !== 'object') {
+  array = testingTransform(array);
+  // each object will have a value and an index
+  }
+  // iterate through the array starting at index 1
+  for (let i = 1; i < array.length; i++) {
+  // for each element, compare it to the element before it
+  // if the element before it is greater than the current element
+    if (array[i - 1].value > array[i].value) {
+      let stored = array[i - 1].value;
+      array[i - 1].value = array[i].value;
+      array[i].value = stored;
+    // swap the two elements
+    }
+  }
+  // continue to compare the current element to the element before it
   return array;
 };
+
+
+let res = insertionSort([{value: 2}, {value: 1}, {value: 3}]);  
+console.log(res);
+
+let res2 = insertionSort([2, 1, 3]);
+console.log(res2);
