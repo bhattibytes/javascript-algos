@@ -47,5 +47,14 @@
  * @return {number}
  */
 const removeDuplicates = function(nums) {
-    
+  // we can simply simply use a set to remove the duplicates 
+  // create a set from the nums array 
+  let deduped = new Set(nums);
+  // create an array from the set produced
+  let result = Array.from(deduped); 
+  // return the length of the new array as the number of unique elements
+  return result.length;
 };
+
+console.log(removeDuplicates([1,1,2])); // 2
+console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4])); // 5
