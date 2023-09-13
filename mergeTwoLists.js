@@ -40,5 +40,39 @@
  * @return {ListNode}
  */
 const mergeTwoLists = function(list1, list2) {
-    
+// account for edge cases where one or both arrays are empty
+list1.length === 0 ? list2 : list2.length === 0 ? list1 : []; 
+  // create a varaible to store new merged list   
+  let mergedList = [];
+  let i = 0;
+  let j = 0;
+  // iterate through both arrays
+  while (i < list1.length && j < list2.length) {
+    // compare the first element of each array
+    if (list1[i] < list2[j]) {
+      // push the smaller element into the new array
+      mergedList.push(list1[i]);
+      // increment the index of the array that had the smaller element
+      i++;
+    } else {
+      mergedList.push(list2[j]);
+      j++;
+    }
+  }
+ // continue until both arrays are empty
+  while (i < list1.length) {
+    mergedList.push(list1[i]);
+    i++;
+  }
+  while (j < list2.length) {
+    mergedList.push(list2[j]);
+    j++;
+  }
+  // return the new array
+  return mergedList;
 };
+
+console.log('[1,1,2,3,4,4]:  ',mergeTwoLists([1,2,4], [1,3,4])); // [1,1,2,3,4,4] 
+console.log('[0]:  ',mergeTwoLists([], [0])); // [0]
+console.log('[]:  ',mergeTwoLists([], []));  // []
+console.log('[1,1,2,3,3,4,4,5,6,7,8,10]:  ',mergeTwoLists([1,2,3,4,5,6,7,8,10], [1,3,4])); // [1,1,2,3,3,4,4,5,6,7,8,10]
