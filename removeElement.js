@@ -52,5 +52,21 @@
  * @return {number}
  */
 const removeElement = function(nums, val) {
-    
+  // create a store array to store all the nums that aren't equal to val 
+  let store = [];
+  // loop over nums checking each element that it does not equal val
+  for ( let i = 0; i < nums.length; i++ ) {
+  // if so add that number to the storage array 
+    if ( nums[i] !== val ) {
+      store.push(nums[i]);
+    }
+  }
+  // after the loop return the storage array's length 
+  return store.length;
 };
+
+console.log(removeElement([0,1,2,2,3,0,4,2], 2));  // 5
+console.log(removeElement([], 1));  // 0
+console.log(removeElement([0,1,2,2,3,0,4,2], 4));  // 7
+console.log(removeElement([2,2,2], 2));  // 0
+console.log(removeElement([0,1,2,2,3,0,4,2], 17));  // 8
