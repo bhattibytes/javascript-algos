@@ -34,5 +34,21 @@
  * @return {number}
  */
 const lengthOfLastWord = function(s) {
-    
+  // solve for edge cases 
+  // string is empty
+  if (s.length === 0) return 0
+  // string only has one element ie there are no spaces
+  if (s.indexOf(' ') === -1) return s.length 
+  // split the string into an array of strings (words)
+  // simply return the length of the last element 
+    let arrayOfWords = s.split(' ');
+    return arrayOfWords[arrayOfWords.length - 1].length 
 };
+
+
+console.log(lengthOfLastWord('Hello World')) // 5
+console.log(lengthOfLastWord('This is a sentence with a lot of words')) // 5
+console.log(lengthOfLastWord('I am me')) // 2
+console.log(lengthOfLastWord('one')) // 3
+console.log(lengthOfLastWord('Hello who are u')) // 1
+console.log(lengthOfLastWord('')) // 0
