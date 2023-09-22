@@ -32,6 +32,32 @@
  * @param {number} x
  * @return {boolean}
  */
-const isPalindrome = function(x) {
-    
+const isPalindrome = function(x) { 
+  // any string this exactly one character is a palindrome
+  // any string that is negative can not be a palindrome
+  // first we will convert the number to a string 
+  // next loop over the string and check if the first character is equal to the last character
+  let stringNum = x.toString();
+  if (stringNum.length === 1) {
+    return true;
+  }
+  if (x < 0) {
+    return false;
+  }
+
+  for (let i = 0; i < stringNum.length; i++) {
+    if (stringNum[i] !== stringNum[stringNum.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
 };
+
+console.log(isPalindrome(121), 'should be true'); // true
+console.log(isPalindrome(-121), 'should be false'); // false
+console.log(isPalindrome(10), 'should be false'); // false
+console.log(isPalindrome(-101), 'should be false'); // false
+console.log(isPalindrome(0), 'should be true'); // true
+console.log(isPalindrome(1), 'should be true'); // true
+console.log(isPalindrome(11), 'should be true'); // true
+console.log(isPalindrome(111), 'should be true'); // true
