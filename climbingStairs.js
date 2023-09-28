@@ -19,7 +19,26 @@
 // 1. 1 step + 1 step + 1 step
 // 2. 1 step + 2 steps
 // 3. 2 steps + 1 step
- 
+
+// Input: n = 4
+// Output: 5
+// 1. 1 step + 1 step + 1 step + 1 step
+// 2. 1 step  + 1 step + 2 steps
+// 3. 2 steps + 2 steps
+// 4. 1 step + 2 steps + 1 step
+// 5. 2 steps + 1 step + 1 step
+
+// Input: n = 5
+// Output: 8
+// 1. 1 step + 1 step + 1 step + 1 step + 1 step
+// 2. 1 step  + 1 step + 1 step + 2 steps
+// 3. 1 step + 2 steps + 2 steps
+// 4. 2 steps + 2 steps + 1 step
+// 5. 1 step + 2 steps + 1 step + 1 step
+// 6. 2 steps + 1 step + 1 step + 1 step
+// 7. 1 step + 1 step + 2 steps + 1 step
+// 8. 2 steps + 1 step + 2 steps
+
 
 // Constraints:
 
@@ -30,5 +49,17 @@
  * @return {number}
  */
 const climbStairs = function(n) {
-    
+  // base cases
+  if (n === 1) return 1;
+  if (n === 2) return 2;
+
+  // recursive case
+  return climbStairs(n-1) + climbStairs(n-2);
 };
+
+console.log("Should be 2", climbStairs(2));
+console.log("Should be 3", climbStairs(3));
+console.log("Should be 5", climbStairs(4));
+console.log("Should be 8", climbStairs(5));
+console.log("Should be 21", climbStairs(7));
+console.log("Should be 2584", climbStairs(17));
