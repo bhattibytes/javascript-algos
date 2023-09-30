@@ -57,14 +57,24 @@ const climbStairs = function(n) {
   // return climbStairs(n-1) + climbStairs(n-2);
   
   // refactored to use dynamic programming
-  const dp = [];
-    dp[1] = 1;
-    dp[2] = 2;
-    for (let i = 3; i <= n; i++){
-        dp[i] = dp[i-1] + dp[i-2];
-    }
-    return dp[n];
+  // const dp = [];
+  //   dp[1] = 1;
+  //   dp[2] = 2;
+  //   for (let i = 3; i <= n; i++){
+  //       dp[i] = dp[i-1] + dp[i-2];
+  //   }
+  //   return dp[n];
 
+    // Refactor to use Memoization
+  const memo = {};
+  const climb = (n) => {
+      if (n === 1) return 1;
+      if (n === 2) return 2;
+      if (memo[n]) return memo[n];
+      memo[n] = climb(n-1) + climb(n-2);
+      return memo[n];
+    }
+  return climb(n);
 };
 
 console.log("Should be 2", climbStairs(2));
