@@ -96,7 +96,62 @@
  */
 
 
+// create a merge function that takes in two arrays
+const merge = function(left, right) {
+  // create a results array
+  let results = [];
+  // create a left pointer and a right pointer
+  let leftPointer = 0;
+  let rightPointer = 0;
+  // while the left pointer is less than the length of the left array and the right pointer is less than the length of the right array
+  while(leftPointer < left.length && rightPointer < right.length) {
+    // if the element at the left pointer is less than the element at the right pointer
+    if(left[leftPointer] < right[rightPointer]) {
+      // push the element at the left pointer into the results array
+      results.push(left[leftPointer]);
+      // increment the left pointer
+      leftPointer++;
+    } else {
+      // otherwise push the element at the right pointer into the results array
+      results.push(right[rightPointer]);
+      // increment the right pointer
+      rightPointer++;
+    }
+  }
+  // while the left pointer is less than the length of the left array
+  while(leftPointer < left.length) {
+    // push the element at the left pointer into the results array
+    results.push(left[leftPointer]);
+    // increment the left pointer
+    leftPointer++;
+  }
 
-var mergeSort = function(array) {
-  // Your code here.
+  // while the right pointer is less than the length of the right array
+  while(rightPointer < right.length) {
+    // push the element at the right pointer into the results array
+    results.push(right[rightPointer]);
+    // increment the right pointer
+    rightPointer++;
+  }
+  // return the results array
+  return results;
 };
+
+
+const mergeSort = function(array) {
+  // edge case: if the array is empty or only has one element, return the array
+  if(array.length <= 1) return array;
+  // create a mid point variable by splitting the array in half
+  let mid = Math.floor(array.length/2);
+  // recrusively call the mergeSort function on the left and right halves of the array
+  let left = mergeSort(array.slice(0,mid));
+  let right = mergeSort(array.slice(mid));
+  // return the merge function on the left and right halves of the array
+  return merge(left, right);
+};
+
+
+console.log(mergeSort([4,7,4,3,9,1,2])); // [1,2,3,4,4,7,9]
+console.log(mergeSort([4,7,4,3,9,1,2,5])); // [1,2,3,4,4,5,7,9]
+console.log(mergeSort([4,7,4,3,9,1,2,5,6])); // [1,2,3,4,4,5,6,7,9]
+console.log(mergeSort([4,7,4,3,9,1,2,5,6,8])); // [1,2,3,4,4,5,6,7,8,9]
