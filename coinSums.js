@@ -24,6 +24,32 @@ makeChange(1) === 1
 makeChange(2) === 2
 */
 
-var makeChange = function(total) {
-
+const makeChange = function(total) {
+  // create a variable to hold the number of ways to make change
+  let ways = 0;
+  // create a function to recurse through the different ways to make change
+  let recurse = function(remaining, coins) {
+    // base case: if the remaining amount is 0, increment the ways variable
+    if (remaining === 0) {
+      ways++;
+    }
+    // recursive case: if the remaining amount is greater than 0, iterate through the coins
+    if (remaining > 0) {
+      for (let i = 0; i < coins.length; i++) {
+        // call the recurse function with the remaining amount minus the current coin and the coins array
+        recurse(remaining - coins[i], coins.slice(i));
+      }
+    }
+  };
+  // call the recurse function with the total amount and the coins array
+  recurse(total, [1, 2, 5, 10, 20, 50, 100, 200]);
+  // return the ways variable
+  return ways;
 };
+
+console.log(makeChange(1)); // 1
+console.log(makeChange(2)); // 2
+console.log(makeChange(3)); // 2
+console.log(makeChange(4)); // 3
+console.log(makeChange(5)); // 4
+console.log(makeChange(6)); // 5
