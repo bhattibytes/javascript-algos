@@ -35,5 +35,12 @@
  * @return {boolean}
  */
 const isSymmetric = function(root) {
-    
+  
 };
+
+
+console.log(isSymmetric([1,2,2,3,4,4,3]), '-> true'); // true
+console.log(isSymmetric([1,2,2,null,3,null,3]), '-> false'); // false
+console.log(isSymmetric([1,2,2,2,null,2]), '-> false'); // false
+console.log(isSymmetric([1,2,2,2,null,2,2]), '-> true'); // true
+console.log(isSymmetric([1,2,2,2,2,2,2]), '-> true'); // true
