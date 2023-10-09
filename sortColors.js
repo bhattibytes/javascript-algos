@@ -30,5 +30,34 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 const sortColors = function(nums) {
-    
+  // edge case: if the array is empty or contains a single element, return the array
+  if (nums.length <= 1) {
+    return nums;
+  }
+  // iterate through the array
+  // if the current element is greater than the next element, swap the elements
+  // if the current element is less than the next element, do nothing
+  // if the current element is equal to the next element, do nothing
+  let sorted = false;
+  while (!sorted) {
+    sorted = true;
+    for (let i = 0; i < nums.length - 1; i++) {
+      let current = nums[i];
+      let next = nums[i + 1];
+      if (current > next) {
+        nums[i] = next;
+        nums[i + 1] = current;
+        sorted = false;
+      }
+    }
+  }
+  return nums;
 };
+
+
+console.log(sortColors([2,0,2,1,1,0])); // [0,0,1,1,2,2]
+console.log(sortColors([2,0,1])); // [0,1,2]
+console.log(sortColors([0])); // [0]
+console.log(sortColors([1])); // [1]
+console.log(sortColors([2])); // [2]
+console.log(sortColors([1,2,0])); // [0,1,2]
