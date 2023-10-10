@@ -33,5 +33,28 @@
  * @return {number}
  */
 const minimumTotal = function(triangle) {
+  // Solve with recursion
+  // initialize min to infinity 
+    let min = Infinity;
+    //  recursive function
+    const recurse = (row, col, sum) => {
+        // base case
+        if (row === triangle.length) {
+          // if sum is less than min, set min to sum
+            min = Math.min(min, sum);
+            return;
+        }
+        // recursive case
+        recurse(row + 1, col, sum + triangle[row][col]);
+        // if col is not the last one in the row
+        recurse(row + 1, col + 1, sum + triangle[row][col]);
+    }
+    // call recursive function
+    recurse(0, 0, 0);
+    return min;
     
 };
+
+
+console.log(minimumTotal([[2],[3,4],[6,5,7],[4,1,8,3]])); // 11
+console.log(minimumTotal([[-10]])); // -10
