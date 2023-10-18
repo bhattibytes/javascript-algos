@@ -34,5 +34,47 @@
  * @return {boolean}
  */
 const search = function(nums, target) {
-    
+  // create variables for left and right pointers
+  let left = 0;
+  let right = nums.length - 1;
+  // while left is less than or equal to right
+  while (left <= right) {
+      // create variable for mid point
+      let mid = Math.floor((left + right) / 2);
+      // if mid is equal to target, return true
+      if (nums[mid] === target) {
+          return true;
+      }
+      // if left is equal to mid and mid is equal to right, increment left and decrement right
+      if (nums[left] === nums[mid] && nums[mid] === nums[right]) {
+          left++;
+          right--;
+      // if left is less than or equal to mid and if target is greater than or equal to left and target is less than mid
+      } else if (nums[left] <= nums[mid]) {
+          if (nums[left] <= target && target < nums[mid]) {
+              // reassign right to mid - 1
+              right = mid - 1;
+          } else {
+            // otherwise, reassign left to mid + 1
+              left = mid + 1;
+          }
+      // otherwise, if mid is less than or equal to right and target is greater than mid and target is less than or equal to right
+      } else {
+          if (nums[mid] < target && target <= nums[right]) {
+              // reassign left to mid + 1
+              left = mid + 1;
+          } else {
+              // otherwise, reassign right to mid - 1
+              right = mid - 1;
+          }
+      }
+  }
+  // if target is never found return false 
+  return false; 
 };
+
+console.log(search([2,5,6,0,0,1,2], 0)); // true
+console.log(search([2,5,6,0,0,1,2], 3)); // false
+console.log(search([1,0,1,1,1], 0)); // true
+console.log(search([1,1,1,0,1], 0)); // true
+console.log(search([1,1,1,1,1], 0)); // false
