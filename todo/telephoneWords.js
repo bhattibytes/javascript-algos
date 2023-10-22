@@ -42,5 +42,22 @@ var phoneDigitsToLetters = {
 
 
 var telephoneWords = function(digitString) {
-  // TODO: return every combination that can be spelled on a phone with these digits
+  var results = [];
+  var recurse = function(currentString, index) {
+    if (index === digitString.length) {
+      results.push(currentString);
+      return;
+    }
+    var currentLetters = phoneDigitsToLetters[digitString[index]];
+    for (var i = 0; i < currentLetters.length; i++) {
+      recurse(currentString + currentLetters[i], index + 1);
+    }
+  };
+  recurse('', 0);
+  return results;
 };
+
+
+console.log(telephoneWords('2745')); // => ['APGJ', 'APGK', 'APGL', ..., 'CSIL']
+console.log(telephoneWords('1123')); // => ['11AD', '11AE', '11AF', '11BD', '11BE', '11BF', '11CD', '11CE', '11CF'] 
+
