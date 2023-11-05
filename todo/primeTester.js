@@ -9,7 +9,8 @@ var primeTester = function(n) {
     // n isn't a number or n is less than 1 or n is not an integer
     return false;
   }
-  // TODO: return true if n is prime, false otherwise
+  // return true if n is prime, false otherwise
+   
 };
 
 /* Extra credit: Write a function that generates a list of all prime numbers
