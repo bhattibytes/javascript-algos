@@ -10,7 +10,19 @@ var primeTester = function(n) {
     return false;
   }
   // return true if n is prime, false otherwise
-   
+  if (n === 1) {
+    return false;
+  }
+  if (n === 2) {
+    return true;
+  }
+  var sqrt = Math.sqrt(n);
+  for (var i = 2; i <= sqrt; i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true; 
 };
 
 /* Extra credit: Write a function that generates a list of all prime numbers
@@ -20,6 +32,20 @@ var primeTester = function(n) {
  */
 
 var primeSieve = function (start, end) {
+  // return an array of all prime numbers between start and end (inclusive)
+  var primes = [];
+  for (var i = start; i <= end; i++) {
+    if (primeTester(i)) {
+      primes.push(i);
+    }
+  }
+  return primes;
+
 };
+
+console.log(primeSieve(1, 100)); // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29 ...]
+console.log(primeSieve(1, 10)); // [2, 3, 5, 7]
+console.log(primeSieve(5, 5)); // [5]
+console.log(primeSieve(5, 6)); // [5]
 
 
