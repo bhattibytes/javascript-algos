@@ -21,6 +21,23 @@
  */
 
 var mixEvents = function(obj) {
-  // TODO: Your code here
+  var events = {};
+
+  obj.trigger = function(event) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    if (events[event]) {
+      events[event].forEach(function(cb) {
+        cb.apply(obj, args);
+      });
+    }
+  }
+
+  obj.on = function(event, callback) {
+    events[event] = events[event] || [];
+    events[event].push(callback);
+  }
+
   return obj;
 };
+
+console.log(mixEvents({ name: 'Alice', age: 30 }));
