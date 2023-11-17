@@ -48,5 +48,16 @@
  * @return {boolean}
  */
 const hasCycle = function(head) {
-    
+  const nodes = new Set();
+  let current = head;
+  while (current) {
+    if (nodes.has(current)) return true;
+    nodes.add(current);
+    current = current.next;
+  }
+  return false; 
 };
+
+console.log(hasCycle([3,2,0,-4], 1)); // true
+console.log(hasCycle([1,2], 0)); // true
+console.log(hasCycle([1], -1)); // false
