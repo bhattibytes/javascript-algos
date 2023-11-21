@@ -79,9 +79,60 @@ BinaryHeap.prototype.getRoot = function () {
 }
 
 BinaryHeap.prototype.insert = function (value) {
-  // TODO: Your code here
+  // push value to the end of the array
+  // compare value to its parent
+  // if value is less than parent, swap
+  // repeat until value is greater than parent
+  // return 
+
+  this._heap.push(value);
+  var index = this._heap.length - 1;
+  var parentIndex = Math.floor((index - 1) / 2);
+
+  while (this._heap[index] < this._heap[parentIndex]) {
+    var temp = this._heap[index];
+    this._heap[index] = this._heap[parentIndex];
+    this._heap[parentIndex] = temp;
+
+    index = parentIndex;
+    parentIndex = Math.floor((index - 1) / 2);
+  }
+
+  return this._heap;
 }
 
 BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  // swap root with last element
+  // remove last element
+  // compare new root with children
+  // if new root is greater than both children, swap with smaller child
+  // repeat until new root is less than both children
+  // return
+
+  var temp = this._heap[0];
+  this._heap[0] = this._heap[this._heap.length - 1];
+  this._heap[this._heap.length - 1] = temp;
+
+  var root = this._heap.pop();
+  var index = 0;
+  var childIndices = [index * 2 + 1, index * 2 + 2];
+
+  while (this._heap[index] > this._heap[childIndices[0]] || this._heap[index] > this._heap[childIndices[1]]) {
+    var smallerChildIndex = this._heap[childIndices[0]] < this._heap[childIndices[1]] ? childIndices[0] : childIndices[1];
+    var temp = this._heap[index];
+    this._heap[index] = this._heap[smallerChildIndex];
+    this._heap[smallerChildIndex] = temp;
+
+    index = smallerChildIndex;
+    childIndices = [index * 2 + 1, index * 2 + 2];
+  }
+
+  return root;
 }
+
+var heap = new BinaryHeap();
+console.log(heap.insert(5)); // [5]
+console.log(heap.insert(2)); // [2, 5]
+console.log(heap.insert(3)); // [2, 5, 3]
+console.log(heap.insert(1)); // [1, 2, 3, 5]
+console.log(heap.insert(4)); // [1, 2, 3, 5, 4]
