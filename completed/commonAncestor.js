@@ -5,15 +5,15 @@
   */
 
 /** example usage:
-  * var grandma = new Tree();
-  * var mom = new Tree();
+  * const grandma = new Tree();
+  * const mom = new Tree();
   * grandma.addChild(mom);
-  * var me = new Tree();
+  * const me = new Tree();
   * mom.addChild(me);
   * grandma.getAncestorPath(me); // => [grandma, mom, me]
 */
 
-var Tree = function() {
+const Tree = function() {
   this.children = [];
 };
 
@@ -38,9 +38,37 @@ Tree.prototype.addChild = function(child) {
   *  3.) between my grandma and my grandma -> my grandma
   *  4.) between me and a potato -> null
   */
-Tree.prototype.getClosestCommonAncestor = function(/*...*/
-) {
+Tree.prototype.getClosestCommonAncestor = function() {
   // TODO: implement me!
+
+  // get the ancestor paths for each child
+  var paths = [];
+  for (var i = 0; i < arguments.length; i++) {
+    paths.push(arguments[i].getAncestorPath());
+  }
+
+  // find the shortest path
+  var shortest = paths[0];
+  for (var i = 1; i < paths.length; i++) {
+    if (paths[i].length < shortest.length) {
+      shortest = paths[i];
+    }
+  }
+
+  // find the closest common ancestor
+  var closest = null;
+  for (var i = 0; i < shortest.length; i++) {
+    var common = true;
+    for (var j = 0; j < paths.length; j++) {
+      if (shortest[i] !== paths[j][i]) {
+        common = false;
+      }
+    }
+    if (common) {
+      closest = shortest[i];
+    }
+  }
+  return closest;
 };
 
 /**
@@ -51,9 +79,23 @@ Tree.prototype.getClosestCommonAncestor = function(/*...*/
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(/*...*/
-) {
+Tree.prototype.getAncestorPath = function() {
   // TODO: implement me!
+  var path = [];
+  const recurse = function (node) {
+    if (node === this) {
+      path.push(node);
+      return path;
+    }
+    if (node.children.length > 0) {
+      path.push(node);
+      for (var i = 0; i < node.children.length; i++) {
+        recurse(node.children[i]);
+      }
+    }
+  };
+  recurse(this);
+  return path;
 };
 
 /**
